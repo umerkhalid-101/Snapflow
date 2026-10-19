@@ -1,0 +1,583 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Snapflow tokens: the live site's own language, kept and refined.   */
+/*  Slate ink, frosted canvas, thin Geist display, slate pill actions. */
+/* ------------------------------------------------------------------ */
+:root {
+  /* Obsidian stage (page) */
+  --page: #05070b;
+  --surface: #0b1017;
+  --surface-2: #111823;
+  --surface-3: #18212e;
+  --edge: rgb(255 255 255 / 0.07);
+  --edge-2: rgb(255 255 255 / 0.13);
+  --fg: #eef2f7;
+  --fg-2: #9aa6b8;
+  --fg-3: #5f6b7d;
+  --glow: #99adbd;
+  --glow-2: #c9d4df;
+  --tint: #ffffff;
+  --tint-rgb: 255 255 255;
+  --shade-rgb: 0 0 0;
+  --chrome-a: #ffffff;
+  --chrome-b: #c8d1dd;
+  --chrome-c: #7b8799;
+  --glass-a: rgb(30 40 54 / 0.95);
+  --glass-b: rgb(12 17 24 / 0.95);
+  --glass-edge-1: #0a0e14;
+  --glass-edge-2: #05070a;
+  --grain: 0.05;
+  --shadow-a: 0.5;
+  --pane-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 30px 60px -30px rgb(0 0 0 / 0.8);
+  --stage-shadow: 0 40px 100px -40px rgb(0 0 0 / 0.7);
+
+  /* Screen UI (the product mocks floating on the stage) */
+  --bg: #fafafa;
+  --frost-top: #d3dbe8;
+  --frost-mid: #e6eaf1;
+  --panel: #f1f4f8;
+  --panel-2: #e8edf3;
+  --card: #ffffff;
+  --line: rgb(15 23 42 / 0.08);
+  --line-strong: rgb(15 23 42 / 0.14);
+
+  --ink: #020617;
+  --ink-2: #0f172a;
+  --body: #475569;
+  --muted: #64748b;
+  --faint: #94a3b8;
+
+  --navy: #1e2836;
+  --navy-2: #2a3546;
+  --navy-3: #364254;
+  --navy-line: rgb(255 255 255 / 0.08);
+  --on-navy: #e8edf4;
+  --on-navy-muted: #9aa6b8;
+
+  --obsidian: #0b0f17;
+  --obsidian-2: #141a24;
+
+  --teal: #99adbd;
+  --teal-deep: #3d5266;
+  --ok: #99adbd;
+  --bad: #ef4444;
+  --amber: #f59e0b;
+  --violet: #7c6cff;
+  --sky: #38bdf8;
+
+  /* Brand accent (the "You make it yours" keypad rewrites it) */
+  --accent: #475569;
+  --accent-ink: #ffffff;
+  --accent-soft: color-mix(in oklab, var(--accent) 14%, white);
+
+  --radius: 14px;
+
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05), 0 2px 8px -2px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 1px 2px rgb(15 23 42 / 0.04), 0 12px 32px -12px rgb(15 23 42 / 0.18);
+  --shadow-lg: 0 2px 4px rgb(15 23 42 / 0.04), 0 30px 60px -24px rgb(15 23 42 / 0.28);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --shiki-foreground: #e2e8f0;
+  --shiki-background: transparent;
+  --shiki-token-constant: #c9d4df;
+  --shiki-token-string: #99adbd;
+  --shiki-token-comment: #64748b;
+  --shiki-token-keyword: #c4b5fd;
+  --shiki-token-parameter: #e2e8f0;
+  --shiki-token-function: #c9d4df;
+  --shiki-token-string-expression: #99adbd;
+  --shiki-token-punctuation: #94a3b8;
+  --shiki-token-link: #99adbd;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-edge: var(--edge);
+  --color-edge-2: var(--edge-2);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-glow: var(--glow);
+  --color-glow-2: var(--glow-2);
+  --color-tint: var(--tint);
+  --color-field: var(--field);
+  --color-code-fg: var(--code-fg);
+  --color-code-str: var(--code-str);
+  --color-code-tag: var(--code-tag);
+  --color-code-kw: var(--code-kw);
+  --color-code-dim: var(--code-dim);
+  --color-bg: var(--bg);
+  --color-frost-top: var(--frost-top);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-navy-3: var(--navy-3);
+  --color-navy-line: var(--navy-line);
+  --color-on-navy: var(--on-navy);
+  --color-on-navy-muted: var(--on-navy-muted);
+  --color-obsidian: var(--obsidian);
+  --color-obsidian-2: var(--obsidian-2);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-ok: var(--ok);
+  --color-bad: var(--bad);
+  --color-amber: var(--amber);
+  --color-violet: var(--violet);
+  --color-sky: var(--sky);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+
+  --radius-ui: var(--radius);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+}
+
+html {
+  background: var(--page);
+  color: var(--fg);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+main {
+  counter-reset: sec;
+}
+
+body {
+  background: var(--page);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--glow);
+  color: var(--page);
+}
+
+:focus-visible {
+  outline: 2px solid var(--glow);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Thin display type, as on the live site */
+@utility display {
+  font-weight: 200;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+@utility h2 {
+  font-weight: 200;
+  letter-spacing: -0.032em;
+  line-height: 1.02;
+  font-size: 42px;
+  @media (width >= 768px) {
+    font-size: 56px;
+  }
+  @media (width >= 1024px) {
+    font-size: 64px;
+  }
+}
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--fg-2);
+  &::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--fg-3);
+  }
+}
+@utility chip-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.08);
+  padding: 4px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--on-navy);
+}
+@utility glass {
+  background: rgb(255 255 255 / 0.62);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgb(255 255 255 / 0.7);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility section {
+  padding-block: 72px;
+  @media (width >= 1024px) {
+    padding-block: 104px;
+  }
+}
+
+/* Isometric floating cards, as in the live hero */
+.iso-card {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgb(255 255 255) inset, 0 3px 0 #dfe5ee, 0 5px 0 #cfd7e3;
+}
+.iso-card-dark {
+  background: var(--navy);
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.08) inset, 0 3px 0 #141b25, 0 5px 0 #0c1118;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 1.05em;
+  vertical-align: -0.16em;
+  background: currentColor;
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateZ(0);
+  }
+  50% {
+    transform: translateZ(14px);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.shiki,
+.shiki code {
+  background: transparent !important;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media (width < 768px) {
+  :root {
+    --field-scale: 0.55;
+  }
+}
+@media (768px <= width < 1024px) {
+  :root {
+    --field-scale: 0.8;
+  }
+}
+
+/* Obsidian stage pieces */
+@utility pane {
+  background: linear-gradient(180deg, rgb(var(--tint-rgb) / 0.045), rgb(var(--tint-rgb) / 0.015));
+  border: 1px solid var(--edge);
+  box-shadow: var(--pane-shadow);
+}
+@utility chrome-text {
+  background: linear-gradient(180deg, var(--chrome-a) 0%, var(--chrome-b) 45%, var(--chrome-c) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility beam {
+  background: linear-gradient(90deg, transparent 10%, var(--glow) 50%, transparent 90%);
+  height: 1px;
+  opacity: 0.16;
+}
+.floor-grid {
+  background-image: linear-gradient(rgb(var(--tint-rgb) / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--tint-rgb) / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.spot {
+  background: radial-gradient(ellipse 50% 60% at 50% 0%, rgb(153 173 189 / 0.16), transparent 70%);
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.iso-glass {
+  background: linear-gradient(160deg, var(--glass-a), var(--glass-b));
+  border-radius: 16px;
+  border: 1px solid rgb(var(--tint-rgb) / 0.1);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 3px 0 var(--glass-edge-1), 0 5px 0 var(--glass-edge-2);
+}
+
+/* Chrome gradient has to live on each animated word, not the wrapper */
+.chrome-text .w > span {
+  background: linear-gradient(180deg, var(--chrome-a) 0%, var(--chrome-b) 50%, var(--chrome-c) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ------------------------------------------------------------------ */
+/*  White mode: the same lab in daylight. Porcelain surfaces, graphite */
+/*  chrome type, deeper teal light. Dark islands stay dark.            */
+/* ------------------------------------------------------------------ */
+:root[data-mode="light"] {
+  --page: #f4f6f9;
+  --surface: #ffffff;
+  --surface-2: #eef2f6;
+  --surface-3: #e2e8f0;
+  --edge: rgb(15 23 42 / 0.08);
+  --edge-2: rgb(15 23 42 / 0.15);
+  --fg: #0b1017;
+  --fg-2: #4a5568;
+  --fg-3: #8592a6;
+  --glow: #5d7184;
+  --glow-2: #3d5266;
+  --tint: #0f172a;
+  --tint-rgb: 15 23 42;
+  --shade-rgb: 51 65 85;
+  --chrome-a: #0b1017;
+  --chrome-b: #334155;
+  --chrome-c: #7b8799;
+  --glass-a: rgb(255 255 255 / 0.96);
+  --glass-b: rgb(238 242 247 / 0.96);
+  --glass-edge-1: #dfe5ee;
+  --glass-edge-2: #cbd4e0;
+  --grain: 0.025;
+  --shadow-a: 0.1;
+  --pane-shadow: inset 0 1px 0 #ffffff, 0 1px 2px rgb(15 23 42 / 0.04), 0 10px 24px -14px rgb(15 23 42 / 0.12);
+  --stage-shadow: 0 1px 2px rgb(15 23 42 / 0.05), 0 24px 48px -28px rgb(15 23 42 / 0.22);
+  color-scheme: light;
+}
+:root[data-mode="light"] .spot {
+  background: radial-gradient(ellipse 50% 60% at 50% 0%, rgb(93 113 132 / 0.10), transparent 70%);
+}
+
+/* Dark islands keep the obsidian tokens in both modes */
+.island {
+  --page: #05070b;
+  --surface: #0b1017;
+  --surface-2: #111823;
+  --surface-3: #18212e;
+  --edge: rgb(255 255 255 / 0.07);
+  --edge-2: rgb(255 255 255 / 0.13);
+  --fg: #eef2f7;
+  --fg-2: #9aa6b8;
+  --fg-3: #5f6b7d;
+  --tint: #ffffff;
+  --tint-rgb: 255 255 255;
+  --shade-rgb: 0 0 0;
+  --chrome-a: #ffffff;
+  --chrome-b: #c8d1dd;
+  --chrome-c: #7b8799;
+  --pane-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 30px 60px -30px rgb(0 0 0 / 0.8);
+  --stage-shadow: 0 40px 100px -40px rgb(0 0 0 / 0.7);
+  --glass-a: rgb(30 40 54 / 0.95);
+  --glass-b: rgb(12 17 24 / 0.95);
+  color: var(--fg);
+}
+:root[data-mode="light"] .island {
+  --glow: #99adbd;
+}
+
+html {
+  transition: background-color 400ms var(--ease-out);
+}
+
+/* Cursor light: a soft spotlight follows the pointer across glass panels */
+.pane {
+  position: relative;
+  isolation: isolate;
+}
+.pane::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--glow) 14%, transparent), transparent 60%);
+}
+.pane:hover::after {
+  opacity: 1;
+}
+
+/* Chrome sheen: a slow sweep of light across chrome type */
+@keyframes sheen {
+  0% {
+    background-position: 160% 0, 0 0;
+  }
+  45%,
+  100% {
+    background-position: -60% 0, 0 0;
+  }
+}
+.chrome-text .w > span,
+.sheen {
+  background-image: linear-gradient(105deg, transparent 42%, rgb(255 255 255 / 0.75) 50%, transparent 58%),
+    linear-gradient(180deg, var(--chrome-a) 0%, var(--chrome-b) 50%, var(--chrome-c) 100%);
+  background-size: 250% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  animation: sheen 7s var(--ease-out) infinite;
+}
+:root[data-mode="light"] .chrome-text .w > span {
+  background-image: linear-gradient(105deg, transparent 42%, rgb(255 255 255 / 0.55) 50%, transparent 58%),
+    linear-gradient(180deg, var(--chrome-a) 0%, var(--chrome-b) 50%, var(--chrome-c) 100%);
+}
+
+@keyframes does-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Restored: the glass hexagon's inner ring turns slowly */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* White mode hero: crisp porcelain tiles that read against the floor */
+:root[data-mode="light"] .iso-glass {
+  border-color: rgb(15 23 42 / 0.1);
+  box-shadow: inset 0 1px 0 #ffffff, 0 3px 0 #d3dbe5, 0 5px 0 #bcc6d3, 0 22px 34px -14px rgb(51 65 85 / 0.35);
+}
+.hero-floor {
+  display: none;
+}
+:root[data-mode="light"] .hero-floor {
+  display: block;
+  background: radial-gradient(ellipse 60% 55% at 50% 72%, #dfe5ed 0%, #e9edf3 45%, transparent 75%);
+}
+@keyframes does-progress-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Mock material: every product UI shown inside a card.               */
+/*  Dark page: a cool light grey. White page: a softer grey.           */
+/*  Dark islands always use the dark-page grey.                        */
+/* ------------------------------------------------------------------ */
+.mock {
+  --card: #d3dae3;
+  --bg: #d3dae3;
+  --panel: #c5cdd7;
+  --panel-2: #b8c1cc;
+  --field: #e7ebf0;
+  --line: rgb(11 16 23 / 0.12);
+  --line-strong: rgb(11 16 23 / 0.2);
+  --ink: #0b1017;
+  --ink-2: #1c2531;
+  --body: #3b4757;
+  --muted: #556175;
+  --faint: #6e7a8c;
+  --code-fg: #1c2531;
+  --code-str: #2e5070;
+  --code-tag: #1d4f7a;
+  --code-kw: #5a3fae;
+  --code-dim: rgb(11 16 23 / 0.38);
+  color: var(--ink);
+}
+:root[data-mode="light"] .mock {
+  --card: #e4e9ef;
+  --bg: #e4e9ef;
+  --panel: #d7dee6;
+  --panel-2: #cbd3dd;
+  --field: #f4f6f9;
+  --line: rgb(11 16 23 / 0.09);
+  --line-strong: rgb(11 16 23 / 0.16);
+}
+:root[data-mode="light"] .island .mock {
+  --card: #d3dae3;
+  --bg: #d3dae3;
+  --panel: #c5cdd7;
+  --panel-2: #b8c1cc;
+  --field: #e7ebf0;
+  --line: rgb(11 16 23 / 0.12);
+  --line-strong: rgb(11 16 23 / 0.2);
+  --ink: #0b1017;
+  --ink-2: #1c2531;
+  --body: #3b4757;
+  --muted: #556175;
+  --faint: #6e7a8c;
+}
