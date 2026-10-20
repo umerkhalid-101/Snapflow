@@ -581,3 +581,18 @@ html {
   --muted: #556175;
   --faint: #6e7a8c;
 }
+
+/* Copy guard: printing or "Save as PDF" gives a blank page that says nice tryy */
+@media print {
+  body > * { display: none !important; }
+  html, body { background: #fff !important; }
+  body::after {
+    content: "nice tryy";
+    display: flex; align-items: center; justify-content: center;
+    height: 100vh; font: 200 56px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.035em; color: #0b1017;
+  }
+}
+html.guarded body { -webkit-user-select: none; user-select: none; }
+html.guarded input, html.guarded textarea { -webkit-user-select: text; user-select: text; }
+html.guarded img, html.guarded canvas { -webkit-user-drag: none; }
