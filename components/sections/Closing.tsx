@@ -341,10 +341,10 @@ export function Footer() {
             {f.groups.map((g) => (
               <div key={g.title}>
                 <p className="text-[13px] font-medium text-fg-3">{g.title}</p>
-                <ul className="mt-4 flex flex-col gap-2.5">
+                <ul className="mt-3 flex flex-col gap-0.5">
                   {g.links.map((l) => (
                     <li key={l.href}>
-                      <a href={live(t.base, l.href)} className="text-[14px] text-fg-2 transition-colors hover:text-fg">
+                      <a href={live(t.base, l.href)} className="inline-block py-1.5 text-[14px] text-fg-2 transition-colors hover:text-fg">
                         {l.label}
                       </a>
                     </li>

@@ -1,6 +1,16 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight, AudioLines, Map, Monitor, Palette, Plus, Sparkles, Accessibility } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  AudioLines,
+  Map,
+  Monitor,
+  Palette,
+  Plus,
+  Sparkles,
+  Accessibility,
+} from "lucide-react";
 import { useRef } from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { GlassHex } from "@/components/ui/GlassHex";
@@ -21,10 +31,28 @@ export function Gov() {
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
         /* Orbit turns with scroll; each card counter-rotates so it stays readable. */
-        const st = { trigger: "[data-stage]", start: "top bottom", end: "bottom top", scrub: 1 };
-        gsap.fromTo("[data-orbit]", { rotation: -40 }, { rotation: 140, ease: "none", scrollTrigger: st });
-        gsap.fromTo("[data-orbit-card]", { rotation: 40 }, { rotation: -140, ease: "none", scrollTrigger: st });
-        gsap.to("[data-ring]", { rotation: 360, duration: 24, ease: "none", repeat: -1 });
+        const st = {
+          trigger: "[data-stage]",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        };
+        gsap.fromTo(
+          "[data-orbit]",
+          { rotation: -40 },
+          { rotation: 140, ease: "none", scrollTrigger: st },
+        );
+        gsap.fromTo(
+          "[data-orbit-card]",
+          { rotation: 40 },
+          { rotation: -140, ease: "none", scrollTrigger: st },
+        );
+        gsap.to("[data-ring]", {
+          rotation: 360,
+          duration: 24,
+          ease: "none",
+          repeat: -1,
+        });
         gsap.from("[data-gov-hex]", {
           scale: 0.6,
           opacity: 0,
@@ -54,20 +82,33 @@ export function Gov() {
   );
 
   return (
-    <section ref={root} className="section relative overflow-hidden" aria-label={g.chip}>
+    <section
+      ref={root}
+      className="section relative overflow-hidden"
+      aria-label={g.chip}
+    >
       <div aria-hidden className="spot pointer-events-none absolute inset-0" />
       <div className="relative mx-auto max-w-[1200px] px-5 text-center sm:px-8">
         <span className="chip" data-reveal>
           {g.chip}
         </span>
-        <h2 className="display mt-6 text-[40px] sm:text-[60px] lg:text-[76px]" data-words>
+        <h2
+          className="display mt-6 text-[40px] sm:text-[60px] lg:text-[76px]"
+          data-words
+        >
           <Words text={g.title1} className="chrome-text block" />
           <Words text={g.title2} className="block text-fg-3" />
         </h2>
-        <p className="mx-auto mt-6 max-w-[620px] text-[16px] leading-[1.65] text-fg-2 md:text-[17px]" data-reveal>
+        <p
+          className="mx-auto mt-6 max-w-[620px] text-[16px] leading-[1.65] text-fg-2 md:text-[17px]"
+          data-reveal
+        >
           {g.sub}
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3" data-reveal>
+        <div
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+          data-reveal
+        >
           <Pill
             href="#join"
             onClick={(e) => {
@@ -83,23 +124,43 @@ export function Gov() {
         </div>
 
         {/* stage */}
-        <div data-stage className="relative mx-auto mt-10 grid max-w-[1200px] items-center gap-10 lg:mt-12 lg:grid-cols-[1fr_520px_1fr]">
+        <div
+          data-stage
+          className="relative mx-auto mt-10 grid max-w-[1200px] items-center gap-10 lg:mt-12 lg:grid-cols-[1fr_520px_1fr]"
+        >
           {/* left */}
-          <div data-side className="order-2 flex flex-col items-start gap-6 text-left lg:order-1">
+          <div
+            data-side
+            className="order-2 flex flex-col items-start gap-6 text-left lg:order-1"
+          >
             <div className="pane max-w-[300px] rounded-2xl p-5">
               <AudioLines size={18} className="text-glow" />
-              <p className="mt-3 text-[17px] font-light text-fg">{g.left.title}</p>
-              <p className="mt-1.5 text-[13.5px] leading-[1.55] text-fg-2">{g.left.body}</p>
+              <p className="mt-3 text-[17px] font-light text-fg">
+                {g.left.title}
+              </p>
+              <p className="mt-1.5 text-[13.5px] leading-[1.55] text-fg-2">
+                {g.left.body}
+              </p>
             </div>
-            <p className="max-w-[260px] text-[13px] leading-[1.55] text-fg-3">{g.built}</p>
+            <p className="max-w-[260px] text-[13px] leading-[1.55] text-fg-3">
+              {g.built}
+            </p>
             <Team labels={["DS", "FE", "PM"]} />
           </div>
 
           {/* center */}
-          <div className="relative order-1 mx-auto aspect-square w-full max-w-[520px] [container-type:inline-size] lg:order-2">
-            <div aria-hidden className="absolute inset-[22%] rounded-full bg-glow/25 blur-[70px]" />
-            <div data-gov-hex className="absolute inset-[16%]">
-              <GlassHex className="size-full" spinGlow intensity={1.2} uid="gov" />
+          <div className="relative order-1 mx-auto aspect-square w-full max-w-[520px] [--orbit-r:34cqw] [container-type:inline-size] sm:[--orbit-r:46cqw] lg:order-2">
+            <div
+              aria-hidden
+              className="absolute inset-[22%] rounded-full bg-glow/25 blur-[70px]"
+            />
+            <div data-gov-hex className="absolute inset-[24%] sm:inset-[16%]">
+              <GlassHex
+                className="size-full"
+                spinGlow
+                intensity={1.2}
+                uid="gov"
+              />
             </div>
             <div data-orbit className="absolute inset-0">
               {g.orbit.map((label, i) => {
@@ -109,9 +170,14 @@ export function Gov() {
                   <div
                     key={label}
                     className="absolute left-1/2 top-1/2"
-                    style={{ transform: `translate(-50%, -50%) translate(${Math.cos(a) * 46}cqw, ${Math.sin(a) * 46}cqw)` }}
+                    style={{
+                      transform: `translate(-50%, -50%) translate(calc(var(--orbit-r) * ${Math.cos(a).toFixed(4)}), calc(var(--orbit-r) * ${Math.sin(a).toFixed(4)}))`,
+                    }}
                   >
-                    <div data-orbit-card className="pane flex items-center gap-2 whitespace-nowrap rounded-xl bg-surface/80 px-3 py-2 backdrop-blur">
+                    <div
+                      data-orbit-card
+                      className="pane flex items-center gap-2 whitespace-nowrap rounded-xl bg-surface/80 px-3 py-2 backdrop-blur"
+                    >
                       <Icon size={14} className="text-glow" />
                       <span className="text-[12.5px] text-fg">{label}</span>
                     </div>
@@ -122,12 +188,19 @@ export function Gov() {
           </div>
 
           {/* right */}
-          <div data-side className="order-3 flex flex-col items-start gap-6 text-left lg:items-end lg:text-right">
+          <div
+            data-side
+            className="order-3 flex flex-col items-start gap-6 text-left lg:items-end lg:text-right"
+          >
             <RingBadge text={g.ring} />
             <div className="pane max-w-[300px] rounded-2xl p-5">
               <Team labels={["UX", "DE", "QA"]} />
-              <p className="mt-4 text-[17px] font-light text-fg">{g.right.title}</p>
-              <p className="mt-1.5 text-[13.5px] leading-[1.55] text-fg-2">{g.right.body}</p>
+              <p className="mt-4 text-[17px] font-light text-fg">
+                {g.right.title}
+              </p>
+              <p className="mt-1.5 text-[13.5px] leading-[1.55] text-fg-2">
+                {g.right.body}
+              </p>
             </div>
             <p className="flex items-center gap-2 text-[13px] text-fg-2">
               <Sparkles size={14} className="text-glow" />
@@ -155,7 +228,10 @@ function Team({ labels }: { labels: string[] }) {
           {l}
         </span>
       ))}
-      <span data-avatar className="grid size-9 place-items-center rounded-full border-2 border-page bg-surface-3 text-fg-2">
+      <span
+        data-avatar
+        className="grid size-9 place-items-center rounded-full border-2 border-page bg-surface-3 text-fg-2"
+      >
         <Plus size={14} />
       </span>
     </div>
@@ -165,11 +241,26 @@ function Team({ labels }: { labels: string[] }) {
 function RingBadge({ text }: { text: string }) {
   return (
     <div className="relative size-[132px]">
-      <svg data-ring viewBox="0 0 132 132" className="absolute inset-0 size-full" aria-hidden>
+      <svg
+        data-ring
+        viewBox="0 0 132 132"
+        className="absolute inset-0 size-full"
+        aria-hidden
+      >
         <defs>
-          <path id="gov-ring" d="M66,66 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0" />
+          <path
+            id="gov-ring"
+            d="M66,66 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"
+          />
         </defs>
-        <text className="fill-fg-2" style={{ fontSize: 8.6, letterSpacing: "0.18em", fontFamily: "var(--font-geist-mono)" }}>
+        <text
+          className="fill-fg-2"
+          style={{
+            fontSize: 8.6,
+            letterSpacing: "0.18em",
+            fontFamily: "var(--font-geist-mono)",
+          }}
+        >
           <textPath href="#gov-ring" textLength="324" lengthAdjust="spacing">
             {text}
           </textPath>

@@ -75,9 +75,10 @@ export function Hero() {
         }
       });
 
-      mm.add(MQ.desktop, () => {
+      /* The snap plays on every screen size: phones get a shorter scroll. */
+      mm.add(MQ.motion, () => {
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: root.current, start: "top top", end: "+=140%", pin: true, scrub: 1 },
+          scrollTrigger: { trigger: root.current, start: "top top", end: () => (window.innerWidth < 1024 ? "+=110%" : "+=140%"), pin: true, scrub: 1 },
         });
         tl.to("[data-hero-copy]", { y: -160, opacity: 0, ease: "power2.in", duration: 0.3 }, 0)
           .to("[data-hero-hint]", { opacity: 0, duration: 0.1 }, 0)
@@ -199,7 +200,7 @@ export function Hero() {
         </div>
 
         {/* the finished screen rises out of the core: the page and its code, with spec redlines to the tokens */}
-        <div className="absolute left-1/2 top-[8%] z-20 -translate-x-1/2" style={{ perspective: 1400 }}>
+        <div className="absolute left-1/2 top-[-10%] z-20 -translate-x-1/2 lg:top-[8%]" style={{ perspective: 1400 }}>
           <div data-rise className="w-[min(92vw,820px)] opacity-0">
             <Composed />
           </div>
